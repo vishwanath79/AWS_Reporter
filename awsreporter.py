@@ -38,8 +38,6 @@ def all_instances():
             allins1 = b.instance_type, b.tags.get("cluster")
             allins.append(allins1)
             i += 1
-    # for item in sort:
-    # print item[0],item[1]
     print "\nTOTAL NUMBER OF EC2 INSTANCES =  ", i
 
     for a in reservations:
@@ -90,9 +88,7 @@ def all_db_instances():
     disdb2 = sorted(disdb.keys())
     print "\nTotal number  of  Instances = ", i
     for x in disdb2:
-        # Instances with names
-        # print "\n",x[1],x[0],
-        print x, disdb[x]
+      print x, disdb[x]
 
 
 def all_redshift_instances():
@@ -106,7 +102,7 @@ def all_redshift_instances():
                 red['DescribeClustersResponse']['DescribeClustersResult']['Clusters'][0]['NumberOfNodes']
     except:
         print "No instances found"
-        # print "\n Total number  of  Instances =  \n",
+
 
 
 # Get all EMR cluster
@@ -115,10 +111,8 @@ def all_emr():
     print '-------------------------------------------'
     states = ['STARTING', 'BOOTSTRAPPING', 'WAITING', 'RUNNING', 'TERMINATED', 'TERMINATED_WITH_ERRORS', 'TERMINATING']
     # TERMINATED','TERMINATED_WITH_ERRORS
-    # print emr.list_clusters().clusters.cluster
     for a in emr.list_clusters(cluster_states=states, created_after=yesterday).clusters:
-        # print a.__dict__
-        try:
+       try:
             print "\n Name: ", a.name, "Status: ", a.status.state, "Tag: ", a.tags, "Created Time : ", a.status.timeline.creationdatetime, \
                 "Ended Time : ", a.status.timeline.enddatetime, "Total Time Up (HH:MM:SS): ", \
                 (datetime.datetime.strptime(a.status.timeline.enddatetime,
@@ -127,10 +121,6 @@ def all_emr():
         except:
             print "\n Name: ", a.name, "Status: ", a.status.state, "Tag: ", a.tags, "Created Time : ", a.status.timeline.creationdatetime
 
-
-# response = urllib2.urlopen('http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/ec2/rhel-od.js')
-# pricejson = response.read()
-# print pricejson
 
 def main():
 

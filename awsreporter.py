@@ -57,7 +57,6 @@ def all_instances():
         print x, disins[x]
 
 
-
 # Get all buckets in the cloud
 def all_s3_instances():
     buckets = s3.get_all_buckets()
@@ -88,7 +87,7 @@ def all_db_instances():
     disdb2 = sorted(disdb.keys())
     print "\nTotal number  of  Instances = ", i
     for x in disdb2:
-      print x, disdb[x]
+        print x, disdb[x]
 
 
 def all_redshift_instances():
@@ -104,7 +103,6 @@ def all_redshift_instances():
         print "No instances found"
 
 
-
 # Get all EMR cluster
 def all_emr():
     print '\nALL RUNNING,WAITING, STARTING, BOOTSTRAPPING,TERMINATED EMR CLUSTERS  IN THE LAST 24 HOURS'
@@ -112,7 +110,7 @@ def all_emr():
     states = ['STARTING', 'BOOTSTRAPPING', 'WAITING', 'RUNNING', 'TERMINATED', 'TERMINATED_WITH_ERRORS', 'TERMINATING']
     # TERMINATED','TERMINATED_WITH_ERRORS
     for a in emr.list_clusters(cluster_states=states, created_after=yesterday).clusters:
-       try:
+        try:
             print "\n Name: ", a.name, "Status: ", a.status.state, "Tag: ", a.tags, "Created Time : ", a.status.timeline.creationdatetime, \
                 "Ended Time : ", a.status.timeline.enddatetime, "Total Time Up (HH:MM:SS): ", \
                 (datetime.datetime.strptime(a.status.timeline.enddatetime,
@@ -123,7 +121,6 @@ def all_emr():
 
 
 def main():
-
     # full EC2 list
     all_instances()
     # Get all Red Shift instances
@@ -132,7 +129,7 @@ def main():
     all_db_instances()
     # Get all emr clusters
     all_emr()
-        # Get s3 buckets
+    # Get s3 buckets
     all_s3_instances()
 
 
